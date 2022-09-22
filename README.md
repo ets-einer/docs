@@ -1,2 +1,3 @@
-# docs
+# TCC-ETS - Docs
+
 Development documentation
