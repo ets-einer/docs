@@ -47,8 +47,8 @@ export type Sidebar = Record<
 export const SIDEBAR: Sidebar = {
   pt: {
     Introdução: [
-      { text: "Bem-vindo", link: "pt/introducao" },
-      { text: "Como documentar", link: "pt/como" },
+      { text: "Bem-vindo", link: "pt/bem-vindo" },
+      { text: "Como documentar", link: "pt/como-documentar" },
     ],
     Aplicações: [
       { text: "Borum", link: "pt/aplicacoes/borum" },
