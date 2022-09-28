@@ -4,7 +4,7 @@ description: Como contribuir para a documentação
 layout: ../../layouts/MainLayout.astro
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Nesta página estão todas as convenções e práticas que adotamos como padrão para a nossa documentação, e um tutorial de como contribuir.
 
 Sed flavum. Stridore nato, Alcandrumque desint ostendit derat, longoque, eadem
 iunxit miserum pedum pectora. Liberat sine pignus cupit, ferit mihi venias
