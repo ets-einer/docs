@@ -1,6 +1,6 @@
 ---
-title: Page 2
-description: Lorem ipsum dolor sit amet - 2
+title: Como Documentar?
+description: Como contribuir para a documentação
 layout: ../../layouts/MainLayout.astro
 ---
 
