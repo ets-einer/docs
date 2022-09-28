@@ -32,7 +32,7 @@ body {
 
 nav ul {
 	list-style: none;
-	padding: 0;
+	padding: 0rem;
 }
 
 .content > section > * + * {
@@ -95,6 +95,15 @@ p {
 
 .content ul {
 	line-height: 1.1em;
+	margin-top: 0.5rem;
+}
+
+.content ul {
+	margin-bottom: 1.5rem;
+}
+
+.content ul li ul {
+	margin-top: 0.5rem;
 }
 
 p,
