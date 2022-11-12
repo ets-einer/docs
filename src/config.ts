@@ -54,6 +54,7 @@ export const SIDEBAR: Sidebar = {
       { text: "Borum", link: "pt/aplicacoes/borum" },
       { text: "BoschPlanner", link: "pt/aplicacoes/boschplanner" },
       { text: "VSDIAWeb", link: "pt/aplicacoes/vsdiaweb" },
+      { text: "Common", link: "pt/aplicacoes/common" },
     ],
   },
 };
