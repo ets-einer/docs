@@ -1,5 +1,5 @@
 ---
-title: Bórum - Básico (Escopo ETS)
+title: Borum - Básico (Escopo ETS)
 description: Conceitos básicos do Bórum
 layout: ../../../layouts/MainLayout.astro
 ---
@@ -48,7 +48,6 @@ Para cada aula publicada, temos uma aba de discussão, onde alunos podem fazer p
 
 Alunos podem postar suas dúvidas, as dúvidas podem ser respondidas por qualquer um na plataforma, respostas podem ser votadas para filtragem das respostas.
 
-Pessoas
 
 ## Guia da comunidade
 

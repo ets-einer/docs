@@ -49,6 +49,7 @@ export const SIDEBAR: Sidebar = {
     Introdução: [
       { text: "Bem-vindo", link: "pt/bem-vindo" },
       { text: "Como documentar", link: "pt/como-documentar" },
+      { text: "Git e Github", link: "pt/git-e-github" },
     ],
     Aplicações: [
       { text: "Borum", link: "pt/aplicacoes/borum" },
