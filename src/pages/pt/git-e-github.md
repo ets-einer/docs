@@ -69,8 +69,7 @@ Fix: typo
 
 I this commit a fixed a typo in the documentation
 
-```bash
-$ git commit -m "add: html form for login page"
-
-```Co-authored-by: AUTHOR-NAME <ANOTHER-NAME@EXAMPLE.COM>
+Co-authored-by: AUTHOR-NAME <ANOTHER-NAME@EXAMPLE.COM>
 ```
+
+
