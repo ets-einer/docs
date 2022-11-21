@@ -64,12 +64,12 @@ Para nomear cada branch do tipo **Feature**, seguimos a convenção:
 
 Para commitar com vários autores, basta colocar o seguinte texto logo abaixo da mensagem de commit
 
-```bash
+```
 Fix: typo
 
 I this commit a fixed a typo in the documentation
 
-$ git commit -m "add: html form for login page"
+Co-authored-by: AUTHOR-NAME <ANOTHER-NAME@EXAMPLE.COM>
 ```
 
-Co-authored-by: AUTHOR-NAME <ANOTHER-NAME@EXAMPLE.COM>
+
