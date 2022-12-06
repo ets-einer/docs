@@ -67,7 +67,7 @@ Para commitar com vários autores, basta colocar o seguinte texto logo abaixo da
 ```
 Fix: typo
 
-I this commit a fixed a typo in the documentation
+In this commit I fixed a typo in the documentation.
 
 Co-authored-by: AUTHOR-NAME <ANOTHER-NAME@EXAMPLE.COM>
 ```
