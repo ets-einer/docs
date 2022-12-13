@@ -57,5 +57,8 @@ export const SIDEBAR: Sidebar = {
       { text: "VSDIAWeb", link: "pt/aplicacoes/vsdiaweb" },
       { text: "Common", link: "pt/aplicacoes/common" },
     ],
+    Utils: [
+      { text: "Links", link: "pt/utils/links" }
+    ]
   },
 };
