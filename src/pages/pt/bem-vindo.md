@@ -1,7 +1,6 @@
 ---
 title: Introdução
 description: Docs intro
-layout: ../../layouts/MainLayout.astro
 ---
 
 **Bem-vindo à documentação do nosso TCC!**

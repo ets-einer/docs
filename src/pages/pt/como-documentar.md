@@ -1,7 +1,6 @@
 ---
 title: Como Documentar?
 description: Como contribuir para a documentação
-layout: ../../layouts/MainLayout.astro
 ---
 
 Nesta página estão todas as convenções e práticas que adotamos como padrão para a nossa documentação, e um tutorial de como contribuir.

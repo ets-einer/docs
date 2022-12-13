@@ -2,7 +2,7 @@
 import { getLanguageFromURL } from "../../languages";
 import { SIDEBAR } from "../../config";
 import lodash from "lodash";
-import fs from "fs";
+import fs, { link } from "fs";
 
 type Props = {
   currentPage: string;
@@ -26,31 +26,26 @@ for (const page of pages) {
         pageSections.slice(0, pageSections.length - 1).join("/") +
         "/_meta.json";
 
-      let response = undefined;
+      let meta;
 
       try {
-        response = fs.readFileSync(`./src/pages/${metaLocation}`, {
+        meta = fs.readFileSync(`./src/pages/${metaLocation}`, {
           encoding: "utf-8",
           flag: "r",
         });
-      } catch (error) {
-        console.error(error);
-      }
+      } catch {}
 
-      if (response === undefined) {
-        response = pageSections.slice(-1);
-      } else {
+      if (meta === undefined) meta = pageSections.slice(-1);
+      else {
         try {
-          const meta = JSON.parse(response);
-          response = meta.name;
+          meta = JSON.parse(meta);
         } catch (error) {
-          console.error(error);
-          response = pageSections.slice(-1);
+          meta = pageSections.slice(-1);
         }
       }
 
       return {
-        name: response,
+        ...meta,
         children: {
           [pageSections[index]]: page.frontmatter,
         },
@@ -69,7 +64,7 @@ console.log(JSON.stringify(pageTree, null, 2));
 
 <nav aria-labelledby="grid-left">
   <ul class="nav-groups">
-    {
+    <!-- {
       Object.entries(sidebar).map(([header, children]) => (
         <li>
           <div class="nav-group">
@@ -92,6 +87,28 @@ console.log(JSON.stringify(pageTree, null, 2));
               })}
             </ul>
           </div>
+        </li>
+      ))
+    } -->
+    {
+      Object.entries(pageTree.pt).map(([key, value]) => (
+        // <li>{JSON.stringify({ [key]: value }, null, 2)}</li>
+        <li>
+          {(function renderSideBar(node) {
+            if (!node.children) {
+              return Object.entries(node).map(([key, value]) => {
+                // console.log("node value:", value);
+                return <div>{value.title}</div>;
+              });
+            } else {
+              return (
+                <div>
+                  <h3>{node.name}</h3>
+                  {renderSideBar(node.children)}
+                </div>
+              );
+            }
+          })(value)}
         </li>
       ))
     }
