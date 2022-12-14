@@ -20,3 +20,6 @@ pnpm-debug.log*
 
 # direnv generated files
 .direnv
+
+package-lock.json
+yarn.lock
