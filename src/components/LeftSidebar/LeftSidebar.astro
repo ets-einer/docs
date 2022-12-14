@@ -3,24 +3,61 @@ import { getLanguageFromURL } from "../../languages";
 import { SIDEBAR } from "../../config";
 import lodash from "lodash";
 import fs, { link } from "fs";
+import LeftSidebarTree from "./LeftSidebarTree";
 
-type Props = {
+export type Props = {
   currentPage: string;
 };
+
+export type Page = {
+  frontmatter: PageFrontMatter;
+  file: string;
+  url: string;
+};
+
+export type PageFrontMatter = {
+  layout: string;
+  title: string;
+  description: string;
+};
+
+export type PageFolder = {
+  [folderName: string]: PageTree;
+};
+
+export type PageChildren = {
+  [childrenName: string]: PageFrontMatter;
+};
+
+export type PageTree = {
+  folders?: PageFolder;
+  children?: PageChildren;
+  position?: number;
+  url?: string;
+};
+
+// let tree: PageTree = {
+//   folders: {
+//     pt: {
+//       ,
+//     },
+//   },
+// };
 
 const { currentPage } = Astro.props as Props;
 const currentPageMatch = currentPage.slice(1);
 const langCode = getLanguageFromURL(currentPage);
-const sidebar = SIDEBAR[langCode];
 
-const pages = await Astro.glob("../../pages/pt/**/*md");
+// const sidebar = SIDEBAR[langCode];
 
-let pageTree = {};
+const pages: Page[] = await Astro.glob("../../pages/pt/**/*md");
+
+let pageTree: PageTree = {};
 
 for (const page of pages) {
   const pageSections = page.url.split("/");
   pageSections.splice(0, 1);
-  function loopOverSections(index: number): Object | any {
+  function loopOverSections(index: number): Object {
     if (index >= pageSections.length - 1) {
       const metaLocation =
         pageSections.slice(0, pageSections.length - 1).join("/") +
@@ -46,24 +83,31 @@ for (const page of pages) {
 
       return {
         ...meta,
+        url: page.url,
         children: {
           [pageSections[index]]: page.frontmatter,
         },
       };
     }
-    // pageTree[pageSections[index]] = loopOverSections(index + 1);
-    // loopOverSections(index + 1);
     return {
-      [pageSections[index]]: loopOverSections(index + 1),
+      folders: {
+        [pageSections[index]]: loopOverSections(index + 1),
+      },
     };
   }
   pageTree = lodash.merge(pageTree, loopOverSections(0));
 }
-console.log(JSON.stringify(pageTree, null, 2));
+// console.log(JSON.stringify(pageTree, null, 2));
 ---
 
 <nav aria-labelledby="grid-left">
   <ul class="nav-groups">
+    <LeftSidebarTree
+      tree={pageTree}
+      langCode={langCode}
+      currentPageMatch={currentPageMatch}
+      Astro={Astro}
+    />
     <!-- {
       Object.entries(sidebar).map(([header, children]) => (
         <li>
@@ -90,14 +134,13 @@ console.log(JSON.stringify(pageTree, null, 2));
         </li>
       ))
     } -->
-    {
+    <!-- {
       Object.entries(pageTree.pt).map(([key, value]) => (
         // <li>{JSON.stringify({ [key]: value }, null, 2)}</li>
         <li>
-          {(function renderSideBar(node) {
+          {(function renderSideBar(node: any) {
             if (!node.children) {
               return Object.entries(node).map(([key, value]) => {
-                // console.log("node value:", value);
                 return <div>{value.title}</div>;
               });
             } else {
@@ -111,7 +154,7 @@ console.log(JSON.stringify(pageTree, null, 2));
           })(value)}
         </li>
       ))
-    }
+    } -->
   </ul>
 </nav>
 
