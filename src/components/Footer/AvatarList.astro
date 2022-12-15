@@ -5,8 +5,8 @@ type Props = {
 };
 const { path } = Astro.props as Props;
 const resolvedPath = `${path}`;
-const url = `https://api.github.com/repos/tcc-ets/docs/commits?path=${resolvedPath}`;
-const commitsURL = `https://github.com/tcc-ets/docs/commits/main/${resolvedPath}`;
+const url = `https://api.github.com/repos/bosch-einer/docs/commits?path=${resolvedPath}`;
+const commitsURL = `https://github.com/bosch-einer/docs/commits/main/${resolvedPath}`;
 
 type Commit = {
   author: {
