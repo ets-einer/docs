@@ -1,8 +1,15 @@
 import React from "react";
-import type { PageTree, PageFolder, PageChildren } from "./LeftSidebar.astro";
+import type { ReactNode } from "react";
+import type {
+  PageTree,
+  PageFolder,
+  PageChildren,
+  PageFrontMatter,
+} from "./LeftSidebar.astro";
 import "./LeftSidebar.css";
 
 import { SIDEBAR } from "../../config";
+import { url } from "inspector";
 
 type LeftSidebarTreeProps = {
   tree: PageTree;
@@ -21,36 +28,55 @@ export default function LeftSidebarTree({
   // console.log(tree);
   return (
     <div>
-      {Object.entries(tree.folders.pt).map(([keyP, valueP]) => {
+      {Object.entries(tree).map(([keyP, valueP]) => {
         return (
-          <li>
+          <ul>
             {(function renderSideBar(
               key: string,
-              value: string | number | PageFolder | PageChildren
-            ) {
+              value: string | number | PageFolder | PageChildren | PageTree
+            ): ReactNode {
               if (
                 key !== "children" &&
                 key !== "folders" &&
+                typeof value !== "string" &&
+                typeof value !== "number" &&
                 !value.folders &&
-                !value.children
+                !value.children &&
+                "title" in value &&
+                "url" in value &&
+                typeof value.url === "string"
               ) {
-                console.log(value);
+                console.log({ currentPageMatch, url: value.url });
                 return (
-                  <div>
-                    <p>{value.title}</p>
-                  </div>
+                  <li
+                    aria-current={
+                      currentPageMatch === value.url ? "page" : false
+                    }
+                    className="nav-link"
+                  >
+                    <a href={value.url}>{value.title}</a>
+                  </li>
                 );
               }
 
               if (key === "folders") {
                 return Object.entries(value).map(
                   ([foldersChildKey, foldersChildValue]) => {
-                    // console.log({ foldersChildKey, foldersChildValue });
+                    if (!foldersChildValue.name) {
+                      return renderSideBar(foldersChildKey, foldersChildValue);
+                    }
                     return (
-                      <div>
-                        <h3>{foldersChildValue.name}</h3>
-                        {renderSideBar(foldersChildKey, foldersChildValue)}
-                      </div>
+                      <li className="nav-group">
+                        <div className="nav-link bold">
+                          <p>
+                            <b>{foldersChildValue.name}</b>
+                          </p>
+                        </div>
+
+                        <ul className="identation">
+                          {renderSideBar(foldersChildKey, foldersChildValue)}
+                        </ul>
+                      </li>
                     );
                   }
                 );
@@ -59,26 +85,25 @@ export default function LeftSidebarTree({
               if (key === "children") {
                 return Object.entries(value).map(
                   ([ChildrenChildKey, ChildrenChildValue]) => {
-                    // console.log({ ChildrenChildKey, ChildrenChildValue });
-                    return (
-                      <div>
-                        {renderSideBar(ChildrenChildKey, ChildrenChildValue)}
-                      </div>
-                    );
+                    return renderSideBar(ChildrenChildKey, ChildrenChildValue);
                   }
                 );
               }
 
-              if (value.children || value.folders) {
+              if (
+                (typeof value !== "string" &&
+                  typeof value !== "number" &&
+                  value.children) ||
+                (typeof value !== "string" &&
+                  typeof value !== "number" &&
+                  value.folders)
+              ) {
                 return Object.entries(value).map(([ChildKey, ChildValue]) => {
-                  // console.log({ ChildKey, ChildValue });
-                  return <div>{renderSideBar(ChildKey, ChildValue)}</div>;
+                  return renderSideBar(ChildKey, ChildValue);
                 });
               }
-
-              // console.log({ key, value });
             })(keyP, valueP)}
-          </li>
+          </ul>
         );
       })}
       {/* {Object.entries(sidebar).map(([header, children]) => (

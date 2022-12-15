@@ -19,6 +19,7 @@ export type PageFrontMatter = {
   layout: string;
   title: string;
   description: string;
+  url: string;
 };
 
 export type PageFolder = {
@@ -45,7 +46,7 @@ export type PageTree = {
 // };
 
 const { currentPage } = Astro.props as Props;
-const currentPageMatch = currentPage.slice(1);
+const currentPageMatch = "/" + currentPage.slice(1);
 const langCode = getLanguageFromURL(currentPage);
 
 // const sidebar = SIDEBAR[langCode];
@@ -83,9 +84,11 @@ for (const page of pages) {
 
       return {
         ...meta,
-        url: page.url,
         children: {
-          [pageSections[index]]: page.frontmatter,
+          [pageSections[index]]: {
+            ...page.frontmatter,
+            url: page.url,
+          },
         },
       };
     }
