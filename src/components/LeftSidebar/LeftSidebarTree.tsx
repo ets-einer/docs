@@ -25,7 +25,6 @@ export default function LeftSidebarTree({
   Astro,
 }: LeftSidebarTreeProps) {
   // const sidebar = SIDEBAR[langCode];
-  // console.log(tree);
   return (
     <div>
       {Object.entries(tree).map(([keyP, valueP]) => {
@@ -46,7 +45,6 @@ export default function LeftSidebarTree({
                 "url" in value &&
                 typeof value.url === "string"
               ) {
-                console.log({ currentPageMatch, url: value.url });
                 return (
                   <li
                     aria-current={

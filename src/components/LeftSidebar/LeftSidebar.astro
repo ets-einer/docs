@@ -100,7 +100,17 @@ for (const page of pages) {
   }
   pageTree = lodash.merge(pageTree, loopOverSections(0));
 }
-// console.log(JSON.stringify(pageTree, null, 2));
+console.log(JSON.stringify(pageTree, null, 2));
+
+// needs to traverse tree and sort by position (probably will use a recursive func)
+function sortPageTree(tree: PageTree) {
+  let sortedTree: PageTree = {};
+  let maxPosition = 0;
+  if ("position" in tree) {
+    // do something here idk
+  }
+}
+sortPageTree(pageTree.folders.pt);
 ---
 
 <nav aria-labelledby="grid-left">
