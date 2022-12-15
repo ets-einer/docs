@@ -49,6 +49,8 @@ const { currentPage } = Astro.props as Props;
 const currentPageMatch = "/" + currentPage.slice(1);
 const langCode = getLanguageFromURL(currentPage);
 
+console.log(currentPageMatch);
+
 // const sidebar = SIDEBAR[langCode];
 
 const pages: Page[] = await Astro.glob("../../pages/pt/**/*md");
@@ -100,7 +102,7 @@ for (const page of pages) {
   }
   pageTree = lodash.merge(pageTree, loopOverSections(0));
 }
-console.log(JSON.stringify(pageTree, null, 2));
+// console.log(JSON.stringify(pageTree, null, 2));
 
 // needs to traverse tree and sort by position (probably will use a recursive func)
 function sortPageTree(tree: PageTree) {

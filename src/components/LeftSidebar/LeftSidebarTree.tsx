@@ -48,7 +48,7 @@ export default function LeftSidebarTree({
                 return (
                   <li
                     aria-current={
-                      currentPageMatch === value.url ? "page" : false
+                      currentPageMatch === value.url + "/" ? "page" : false
                     }
                     className="nav-link"
                   >
